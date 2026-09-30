@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập | Quản lý quán cafe</title>
+  </head>
+  <body>
+    <main>
+      <h1>Đăng nhập</h1>
+
+      {% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% for message in messages %}
+          <p role="alert">{{ message }}</p>
+        {% endfor %}
+      {% endwith %}
+
+      <form method="post" action="{{ url_for('auth.login') }}">
+        <label for="username">Tên đăng nhập</label>
+        <input id="username" name="username" type="text" autocomplete="username" required />
+
+        <label for="password">Mật khẩu</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+
+        <button type="submit">Đăng nhập</button>
+      </form>
+    </main>
+  </body>
+</html>
