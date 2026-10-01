@@ -116,6 +116,9 @@
         <a class="nav-item" href="{{ url_for('payments.payment_list') }}"
           ><span>Thanh toán</span></a
         >
+        <a class="nav-item" href="{{ url_for('inventory.inventory_page') }}"
+          ><span>Kho nguyên liệu</span></a
+        >
         <button
           class="nav-item nav-item-disabled"
           type="button"
@@ -237,7 +240,11 @@
                 {% for category in categories %}
                 <option
                   value="{{ category.id }}"
-                  {% if selected_category_id|string == category.id|string %}selected{%
+                  {%
+                  if
+                  selected_category_id|string=""
+                  ="category.id|string"
+                  %}selected{%
                   endif
                   %}
                 >
@@ -326,7 +333,13 @@
                             {% for category in categories %}
                             <option
                               value="{{ category.id }}"
-                              {% if category.id == item.category_id %}selected{% endif %}
+                              {%
+                              if
+                              category.id=""
+                              ="item.category_id"
+                              %}selected{%
+                              endif
+                              %}
                             >
                               {{ category.name }}
                             </option>

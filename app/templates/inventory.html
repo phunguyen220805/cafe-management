@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#302219" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/inventory.css') }}"
+    />
+    <title>Kho nguyên liệu | Cafe Management</title>
+  </head>
+  <body class="dashboard-page inventory-page">
+    <button
+      class="sidebar-scrim"
+      type="button"
+      data-sidebar-close
+      aria-label="Đóng điều hướng"
+    ></button>
+    <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+      <a class="brand brand-sidebar" href="{{ url_for('main.home') }}">
+        <span class="brand-mark" aria-hidden="true"
+          ><svg viewBox="0 0 48 48" fill="none">
+            <path
+              d="M12 19h22v11a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9V19Z"
+              stroke="currentColor"
+              stroke-width="2.5"
+            />
+            <path
+              d="M34 22h3a5 5 0 0 1 0 10h-4M18 13c0-2 2-2 2-4m7 4c0-2 2-2 2-4M9 42h31"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            /></svg
+        ></span>
+        <span class="brand-words"
+          ><strong>Cafe</strong><small>MANAGEMENT</small></span
+        >
+      </a>
+      <p class="nav-caption">KHÔNG GIAN LÀM VIỆC</p>
+      <nav class="primary-nav">
+        <a class="nav-item" href="{{ url_for('main.home') }}"
+          ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect
+              x="3"
+              y="3"
+              width="8"
+              height="8"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="14"
+              y="3"
+              width="7"
+              height="5"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="14"
+              y="11"
+              width="7"
+              height="10"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="3"
+              y="14"
+              width="8"
+              height="7"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            /></svg
+          ><span>Dashboard</span></a
+        >
+        <a class="nav-item" href="{{ url_for('menu.menu_page') }}"
+          ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0M8 12v.01M16 12v.01"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Menu</span></a
+        >
+        <a class="nav-item" href="{{ url_for('tables.table_page') }}"
+          ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M3 9h18l-1 4H4L3 9Zm2 4v7m14-7v7M8 13v7m8-7v7M7 9l1-5m9 5-1-5"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Bàn</span></a
+        >
+        <a class="nav-item" href="{{ url_for('orders.order_list') }}"
+          ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Đơn hàng</span></a
+        >
+        <a class="nav-item" href="{{ url_for('payments.payment_list') }}"
+          ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <path
+              d="M3 10h18m-13 5h4"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            /></svg
+          ><span>Thanh toán</span></a
+        >
+        <a
+          class="nav-item is-active"
+          href="{{ url_for('inventory.inventory_page') }}"
+          aria-current="page"
+          ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Kho nguyên liệu</span></a
+        >
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip">
+          <span class="tip-mark" aria-hidden="true">✳</span>
+          <p>
+            <strong>Góc quán của bạn</strong><br />Một ngày mới, một tách cà phê
+            ngon.
+          </p>
+        </div>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <button class="logout-button" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+            ><span>Đăng xuất</span>
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="topbar">
+        <button
+          class="menu-toggle"
+          type="button"
+          data-sidebar-toggle
+          aria-controls="sidebar"
+          aria-expanded="false"
+          aria-label="Mở điều hướng"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <a class="topbar-brand" href="{{ url_for('main.home') }}"
+          >Cafe <span>Management</span></a
+        >
+        <div class="topbar-right">
+          <span class="today-label"
+            ><span class="online-dot"></span> Kho nguyên liệu</span
+          ><span class="user-avatar" aria-hidden="true"
+            >{{ current_user.username[:1]|upper }}</span
+          ><span class="user-name">{{ current_user.username }}</span>
+        </div>
+      </header>
+
+      <main class="dashboard-content inventory-content">
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">THEO DÕI NGUYÊN LIỆU</p>
+            <h1>Kho nguyên liệu</h1>
+            <p class="page-subtitle">Quản lý tồn kho và lịch sử nhập xuất.</p>
+          </div>
+          <a class="inventory-primary-link" href="#add-ingredient"
+            >+ Thêm nguyên liệu</a
+          >
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% for
+        category, message in messages %}
+        <div
+          class="inventory-flash inventory-flash-{{ category }}"
+          role="{{ 'alert' if category == 'error' else 'status' }}"
+        >
+          {{ message }}
+        </div>
+        {% endfor %} {% endwith %}
+
+        <section
+          class="inventory-toolbar"
+          aria-label="Tìm kiếm và lọc nguyên liệu"
+        >
+          <form
+            class="inventory-filter-form"
+            method="get"
+            action="{{ url_for('inventory.inventory_page') }}"
+          >
+            <label class="inventory-search"
+              ><span class="visually-hidden">Tìm nguyên liệu</span
+              ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle
+                  cx="10.8"
+                  cy="10.8"
+                  r="6.8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="m16 16 4.5 4.5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                /></svg
+              ><input
+                type="search"
+                name="q"
+                value="{{ search }}"
+                placeholder="Tìm theo tên nguyên liệu"
+            /></label>
+            <label class="inventory-filter"
+              ><span class="visually-hidden">Lọc trạng thái</span
+              ><select name="active">
+                <option value="">Tất cả trạng thái</option>
+                <option
+                  value="active"
+                  {%
+                  if
+                  selected_active=""
+                  ="active"
+                  %}selected{%
+                  endif
+                  %}
+                >
+                  Đang dùng
+                </option>
+                <option
+                  value="inactive"
+                  {%
+                  if
+                  selected_active=""
+                  ="inactive"
+                  %}selected{%
+                  endif
+                  %}
+                >
+                  Ngừng dùng
+                </option>
+              </select></label
+            >
+            <label class="inventory-low-filter"
+              ><input
+                type="checkbox"
+                name="low_stock"
+                value="1"
+                {%
+                if
+                low_stock
+                %}checked{%
+                endif
+                %}
+              />
+              Tồn thấp</label
+            >
+            <button
+              class="inventory-button inventory-button-dark"
+              type="submit"
+            >
+              Lọc
+            </button>
+            {% if search or selected_active or low_stock %}<a
+              class="clear-inventory-filter"
+              href="{{ url_for('inventory.inventory_page') }}"
+              >Xóa lọc</a
+            >{% endif %}
+          </form>
+          <span class="inventory-count"
+            >{{ ingredients|length }} nguyên liệu</span
+          >
+        </section>
+
+        <section class="inventory-section" aria-labelledby="ingredients-title">
+          <div class="inventory-section-heading">
+            <div>
+              <p class="section-kicker">SỐ DƯ HIỆN TẠI</p>
+              <h2 id="ingredients-title">Danh sách nguyên liệu</h2>
+            </div>
+          </div>
+          <div class="inventory-table-scroll">
+            <table class="inventory-list">
+              <thead>
+                <tr>
+                  <th>NGUYÊN LIỆU</th>
+                  <th>ĐƠN VỊ</th>
+                  <th>TỒN KHO</th>
+                  <th>MỨC TỐI THIỂU</th>
+                  <th>TRẠNG THÁI</th>
+                  <th>THAO TÁC</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for ingredient in ingredients %}
+                <tr>
+                  <td>
+                    <div class="ingredient-name-cell">
+                      <strong>{{ ingredient.name }}</strong>{% if
+                      ingredient.description %}<small
+                        >{{ ingredient.description }}</small
+                      >{% endif %}
+                    </div>
+                  </td>
+                  <td>{{ ingredient.unit }}</td>
+                  <td class="ingredient-quantity">
+                    {{ "{:,.3f}".format(ingredient.quantity) }}{% if
+                    ingredient.quantity <= ingredient.min_quantity %}<span
+                      class="stock-warning"
+                      >Tồn thấp</span
+                    >{% endif %}
+                  </td>
+                  <td>{{ "{:,.3f}".format(ingredient.min_quantity) }}</td>
+                  <td>
+                    <span
+                      class="ingredient-active ingredient-active-{{ 'yes' if ingredient.is_active else 'no' }}"
+                      ><i></i>{{ "Đang dùng" if ingredient.is_active else "Ngừng
+                      dùng" }}</span
+                    >
+                  </td>
+                  <td class="ingredient-actions">
+                    <details class="ingredient-menu">
+                      <summary>Quản lý</summary>
+                      <div class="ingredient-popover">
+                        <details>
+                          <summary>Sửa thông tin</summary>
+                          <form
+                            class="ingredient-form"
+                            method="post"
+                            action="{{ url_for('inventory.update_ingredient', ingredient_id=ingredient.id) }}"
+                          >
+                            <label
+                              >Tên<input
+                                name="name"
+                                value="{{ ingredient.name }}"
+                                required
+                                maxlength="160" /></label
+                            ><label
+                              >Đơn vị<input
+                                name="unit"
+                                value="{{ ingredient.unit }}"
+                                required
+                                maxlength="24" /></label
+                            ><label
+                              >Mức tồn tối thiểu<input
+                                name="min_quantity"
+                                type="number"
+                                min="0"
+                                step="0.001"
+                                value="{{ ingredient.min_quantity }}"
+                                required /></label
+                            ><label
+                              >Mô tả<textarea name="description" rows="2">
+{{ ingredient.description or '' }}</textarea
+                              ></label
+                            ><label class="inventory-check"
+                              ><input
+                                name="is_active"
+                                type="checkbox"
+                                value="on"
+                                {%
+                                if
+                                ingredient.is_active
+                                %}checked{%
+                                endif
+                                %}
+                              />
+                              Đang dùng</label
+                            >
+                            <p class="inventory-form-note">
+                              Số dư chỉ thay đổi qua nhập kho hoặc xuất kho.
+                            </p>
+                            <button
+                              class="inventory-button inventory-button-dark"
+                              type="submit"
+                            >
+                              Lưu thay đổi
+                            </button>
+                          </form>
+                        </details>
+                        <details>
+                          <summary>Nhập kho</summary>
+                          <form
+                            class="ingredient-form"
+                            method="post"
+                            action="{{ url_for('inventory.import_stock', ingredient_id=ingredient.id) }}"
+                          >
+                            <label
+                              >Số lượng<input
+                                name="quantity"
+                                type="number"
+                                min="0.001"
+                                step="0.001"
+                                required /></label
+                            ><label
+                              >Ghi chú<input
+                                name="note"
+                                maxlength="500" /></label
+                            ><button
+                              class="inventory-button inventory-button-dark"
+                              type="submit"
+                              {%
+                              if
+                              not
+                              ingredient.is_active
+                              %}disabled{%
+                              endif
+                              %}
+                            >
+                              Xác nhận nhập
+                            </button>
+                          </form>
+                        </details>
+                        <details>
+                          <summary>Xuất kho</summary>
+                          <form
+                            class="ingredient-form"
+                            method="post"
+                            action="{{ url_for('inventory.export_stock', ingredient_id=ingredient.id) }}"
+                          >
+                            <label
+                              >Số lượng<input
+                                name="quantity"
+                                type="number"
+                                min="0.001"
+                                step="0.001"
+                                required /></label
+                            ><label
+                              >Ghi chú<input
+                                name="note"
+                                maxlength="500" /></label
+                            ><button
+                              class="inventory-button inventory-button-dark"
+                              type="submit"
+                              {%
+                              if
+                              not
+                              ingredient.is_active
+                              %}disabled{%
+                              endif
+                              %}
+                            >
+                              Xác nhận xuất
+                            </button>
+                          </form>
+                        </details>
+                        <a
+                          class="ingredient-history-link"
+                          href="{{ url_for('inventory.ingredient_history', ingredient_id=ingredient.id) }}"
+                          >Xem lịch sử</a
+                        >
+                        <form
+                          method="post"
+                          action="{{ url_for('inventory.delete_ingredient', ingredient_id=ingredient.id) }}"
+                          onsubmit="return confirm('Xóa nguyên liệu này?');"
+                        >
+                          <button class="inventory-danger" type="submit">
+                            Xóa nguyên liệu
+                          </button>
+                        </form>
+                      </div>
+                    </details>
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td class="empty-inventory" colspan="6">
+                    Chưa có nguyên liệu phù hợp.
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section
+          class="inventory-section inventory-create-section"
+          id="add-ingredient"
+          aria-labelledby="add-ingredient-title"
+        >
+          <div class="inventory-section-heading">
+            <div>
+              <p class="section-kicker">THIẾT LẬP</p>
+              <h2 id="add-ingredient-title">Thêm nguyên liệu</h2>
+            </div>
+          </div>
+          <form
+            class="ingredient-create-form"
+            method="post"
+            action="{{ url_for('inventory.create_ingredient') }}"
+          >
+            <label
+              >Tên nguyên liệu<input
+                name="name"
+                required
+                maxlength="160"
+                placeholder="Ví dụ: Hạt cà phê Arabica"
+            /></label>
+            <label
+              >Đơn vị<input
+                name="unit"
+                required
+                maxlength="24"
+                placeholder="g, ml, kg..."
+            /></label>
+            <label
+              >Mức tồn tối thiểu<input
+                name="min_quantity"
+                type="number"
+                min="0"
+                step="0.001"
+                value="0"
+                required
+            /></label>
+            <label class="ingredient-description-field"
+              >Mô tả<textarea name="description" rows="2"></textarea>
+            </label>
+            <p class="inventory-form-note">
+              Nguyên liệu mới bắt đầu với tồn kho 0. Dùng giao dịch nhập kho để
+              cập nhật số dư.
+            </p>
+            <button
+              class="inventory-button inventory-button-dark"
+              type="submit"
+            >
+              Thêm nguyên liệu
+            </button>
+          </form>
+        </section>
+        <footer class="dashboard-footer">
+          <span>Cafe Management</span><span>Kho nguyên liệu</span>
+        </footer>
+      </main>
+    </div>
+    <script
+      src="{{ url_for('static', filename='js/dashboard.js') }}"
+      defer
+    ></script>
+  </body>
+</html>

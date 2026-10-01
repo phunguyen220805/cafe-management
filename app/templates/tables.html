@@ -125,6 +125,9 @@
         <a class="nav-item" href="{{ url_for('payments.payment_list') }}"
           ><span>Thanh toán</span></a
         >
+        <a class="nav-item" href="{{ url_for('inventory.inventory_page') }}"
+          ><span>Kho nguyên liệu</span></a
+        >
         <button
           class="nav-item nav-item-disabled"
           type="button"
@@ -246,7 +249,11 @@
                 {% for item_status in statuses %}
                 <option
                   value="{{ item_status }}"
-                  {% if selected_status == item_status %}selected{%
+                  {%
+                  if
+                  selected_status=""
+                  ="item_status"
+                  %}selected{%
                   endif
                   %}
                 >
@@ -325,7 +332,13 @@
                             {% for item_status in statuses %}
                             <option
                               value="{{ item_status }}"
-                              {% if table.status == item_status %}selected{% endif %}
+                              {%
+                              if
+                              table.status=""
+                              ="item_status"
+                              %}selected{%
+                              endif
+                              %}
                             >
                               {{ status_labels[item_status] }}
                             </option>
@@ -401,7 +414,13 @@
                 {% for item_status in statuses %}
                 <option
                   value="{{ item_status }}"
-                  {% if item_status == "available" %}selected{% endif %}
+                  {%
+                  if
+                  item_status=""
+                  ="available"
+                  %}selected{%
+                  endif
+                  %}
                 >
                   {{ status_labels[item_status] }}
                 </option>
