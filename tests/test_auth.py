@@ -33,11 +33,22 @@ class AuthTests(unittest.TestCase):
             db.engine.dispose()
         self.temp_dir.cleanup()
 
-    def test_existing_home_route_is_preserved(self):
+    def test_dashboard_redirects_to_login_when_unauthenticated(self):
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.location.startswith("/login?next="))
+
+    def test_dashboard_shows_demo_data_after_login(self):
+        self.client.post(
+            "/login", data={"username": "barista", "password": "Cafe@123"}
+        )
         response = self.client.get("/")
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn("HỆ THỐNG QUẢN LÝ QUÁN CAFE".encode(), response.data)
+        self.assertIn(b"barista", response.data)
+        self.assertIn(b"D\xe1\xbb\xae LI\xe1\xbb\x86U DEMO", response.data)
+        self.assertIn(b"ch\xc6\xb0a k\xe1\xba\xbft n\xe1\xbb\x91i ho\xe1\xba\xa1t \xc4\x91\xe1\xbb\x99ng th\xe1\xbb\xb1c t\xe1\xba\xbf", response.data)
 
     def test_login_succeeds(self):
         response = self.client.post(

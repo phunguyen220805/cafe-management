@@ -30,7 +30,7 @@ def create_app(test_config=None):
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
 
-    from app.models import User
+    from app.models import Category, MenuItem, User
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -42,9 +42,17 @@ def create_app(test_config=None):
 
     from app.routes.main_routes import main_bp
     from app.routes.auth_routes import auth_bp
+    from app.routes.menu_routes import menu_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(menu_bp)
+
+    @app.cli.command("init-db")
+    def init_db():
+        """Create any database tables that are missing."""
+        db.create_all()
+        click.echo("Database tables are ready.")
 
     @app.cli.command("seed-admin")
     @click.option("--username", default="admin", show_default=True)
