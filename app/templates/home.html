@@ -103,12 +103,7 @@
             /></svg
           ><span>Menu</span>
         </a>
-        <button
-          class="nav-item nav-item-disabled"
-          type="button"
-          disabled
-          title="Module chưa được triển khai"
-        >
+        <a class="nav-item" href="{{ url_for('tables.table_page') }}">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M4 10h16M6 10v9m4-9v9m4-9v9m4-9v9M3 20h18M12 4l9 4H3l9-4Z"
@@ -117,8 +112,8 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             /></svg
-          ><span>Bàn</span><small>Sắp có</small>
-        </button>
+          ><span>Bàn</span>
+        </a>
         <button
           class="nav-item nav-item-disabled"
           type="button"

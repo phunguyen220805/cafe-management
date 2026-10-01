@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#302219" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}" />
+    <title>Quản lý bàn | Cafe Management</title>
+  </head>
+  <body class="dashboard-page tables-page">
+    <button class="sidebar-scrim" type="button" data-sidebar-close aria-label="Đóng điều hướng"></button>
+    <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+      <a class="brand brand-sidebar" href="{{ url_for('main.home') }}">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M12 19h22v11a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9V19Z" stroke="currentColor" stroke-width="2.5"/><path d="M34 22h3a5 5 0 0 1 0 10h-4M18 13c0-2 2-2 2-4m7 4c0-2 2-2 2-4M9 42h31" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-words"><strong>Cafe</strong><small>MANAGEMENT</small></span>
+      </a>
+      <p class="nav-caption">KHÔNG GIAN LÀM VIỆC</p>
+      <nav class="primary-nav">
+        <a class="nav-item" href="{{ url_for('main.home') }}">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="11" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="8" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" href="{{ url_for('menu.menu_page') }}">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0M8 12v.01M16 12v.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Menu</span>
+        </a>
+        <a class="nav-item is-active" href="{{ url_for('tables.table_page') }}" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9h18l-1 4H4L3 9Zm2 4v7m14-7v7M8 13v7m8-7v7M7 9l1-5m9 5-1-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Bàn</span>
+        </a>
+        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Đơn hàng</span><small>Sắp có</small></button>
+        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thanh toán</span><small>Sắp có</small></button>
+        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thống kê</span><small>Sắp có</small></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><span class="tip-mark" aria-hidden="true">✳</span><p><strong>Góc quán của bạn</strong><br />Một ngày mới, một tách cà phê ngon.</p></div>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <button class="logout-button" type="submit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đăng xuất</span></button>
+        </form>
+      </div>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="false" aria-label="Mở điều hướng"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <a class="topbar-brand" href="{{ url_for('main.home') }}">Cafe <span>Management</span></a>
+        <div class="topbar-right"><span class="today-label"><span class="online-dot"></span> Quản lý khu vực</span><span class="user-avatar" aria-hidden="true">{{ current_user.username[:1]|upper }}</span><span class="user-name">{{ current_user.username }}</span></div>
+      </header>
+
+      <main class="dashboard-content tables-content">
+        <section class="page-heading">
+          <div><p class="eyebrow">SẮP XẾP KHÔNG GIAN</p><h1>Quản lý bàn</h1><p class="page-subtitle">Theo dõi sức chứa và trạng thái phục vụ.</p></div>
+          <a class="table-primary-link" href="#add-table">+ Thêm bàn</a>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="table-flash table-flash-{{ category }}" role="{{ 'alert' if category == 'error' else 'status' }}">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <section class="tables-toolbar" aria-label="Tìm kiếm và lọc bàn">
+          <form class="tables-filter-form" method="get" action="{{ url_for('tables.table_page') }}">
+            <label class="table-search"><span class="visually-hidden">Tìm bàn</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><input type="search" name="q" value="{{ search }}" placeholder="Tìm theo tên bàn" /></label>
+            <label class="status-filter"><span class="visually-hidden">Lọc trạng thái</span><select name="status"><option value="">Tất cả trạng thái</option>{% for item_status in statuses %}<option value="{{ item_status }}" {% if selected_status == item_status %}selected{% endif %}>{{ status_labels[item_status] }}</option>{% endfor %}</select></label>
+            <button class="table-button table-button-dark" type="submit">Lọc bàn</button>
+            {% if search or selected_status %}<a class="clear-table-filter" href="{{ url_for('tables.table_page') }}">Xóa lọc</a>{% endif %}
+          </form>
+          <span class="table-count">{{ tables|length }} bàn</span>
+        </section>
+
+        <section class="tables-section" aria-labelledby="table-list-title">
+          <div class="tables-section-heading"><div><p class="section-kicker">KHU VỰC PHỤC VỤ</p><h2 id="table-list-title">Danh sách bàn</h2></div></div>
+          <div class="tables-scroll">
+            <table class="tables-list">
+              <thead><tr><th>BÀN</th><th>SỨC CHỨA</th><th>TRẠNG THÁI</th><th>MÔ TẢ</th><th class="table-actions-heading">THAO TÁC</th></tr></thead>
+              <tbody>
+                {% for table in tables %}
+                <tr>
+                  <td><strong class="table-name">{{ table.name }}</strong></td>
+                  <td>{{ table.capacity }} khách</td>
+                  <td><span class="table-status status-{{ table.status }}"><i></i>{{ status_labels[table.status] }}</span></td>
+                  <td class="table-description">{{ table.description or "—" }}</td>
+                  <td class="table-actions"><details class="table-edit-details"><summary aria-label="Sửa {{ table.name }}">Sửa</summary><form class="table-edit-form" method="post" action="{{ url_for('tables.update_table', table_id=table.id) }}"><label>Tên bàn<input name="name" value="{{ table.name }}" required maxlength="120" /></label><label>Sức chứa<input name="capacity" type="number" min="1" step="1" value="{{ table.capacity }}" required /></label><label>Trạng thái<select name="status" required>{% for item_status in statuses %}<option value="{{ item_status }}" {% if table.status == item_status %}selected{% endif %}>{{ status_labels[item_status] }}</option>{% endfor %}</select></label><label>Mô tả<textarea name="description" rows="2">{{ table.description or '' }}</textarea></label><button class="table-button table-button-dark" type="submit">Lưu thay đổi</button></form></details><form method="post" action="{{ url_for('tables.delete_table', table_id=table.id) }}" onsubmit="return confirm('Xóa bàn này?')"><button class="table-danger" type="submit">Xóa</button></form></td>
+                </tr>
+                {% else %}
+                <tr><td class="empty-tables" colspan="5">Chưa có bàn phù hợp với bộ lọc.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="tables-section table-create-section" id="add-table" aria-labelledby="add-table-title">
+          <div class="tables-section-heading"><div><p class="section-kicker">THIẾT LẬP</p><h2 id="add-table-title">Thêm bàn</h2></div></div>
+          <form class="table-create-form" method="post" action="{{ url_for('tables.create_table') }}">
+            <label>Tên bàn<input name="name" required maxlength="120" placeholder="Ví dụ: Bàn 01" /></label>
+            <label>Sức chứa<input name="capacity" type="number" min="1" step="1" required placeholder="4" /></label>
+            <label>Trạng thái<select name="status" required>{% for item_status in statuses %}<option value="{{ item_status }}" {% if item_status == 'available' %}selected{% endif %}>{{ status_labels[item_status] }}</option>{% endfor %}</select></label>
+            <label class="table-description-field">Mô tả<textarea name="description" rows="2" placeholder="Ghi chú tùy chọn"></textarea></label>
+            <button class="table-button table-button-dark" type="submit">Thêm bàn</button>
+          </form>
+        </section>
+        <footer class="dashboard-footer"><span>Cafe Management</span><span>Quản lý bàn</span></footer>
+      </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+  </body>
+</html>

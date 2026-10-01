@@ -1,0 +1,68 @@
+.tables-content { animation: dashboard-in .45s ease both; }
+.table-primary-link, .table-button { display: inline-flex; min-height: 38px; align-items: center; justify-content: center; padding: 0 14px; border: 1px solid transparent; border-radius: 3px; font-size: 11px; font-weight: 700; text-decoration: none; cursor: pointer; transition: background .18s ease, border-color .18s ease, transform .18s ease; }
+.table-primary-link, .table-button-dark { background: var(--coffee); color: #fff8ed; }
+.table-primary-link:hover, .table-button-dark:hover { background: var(--coffee-2); transform: translateY(-1px); }
+.table-flash { margin-bottom: 14px; padding: 11px 14px; border-left: 3px solid; font-size: 11px; line-height: 1.5; }
+.table-flash-success { border-color: #71845f; background: #edf1e9; color: #506044; }
+.table-flash-error { border-color: #a75f52; background: #f5e9e6; color: #84483f; }
+.tables-toolbar { display: flex; min-height: 68px; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 15px; padding: 12px 15px; border: 1px solid var(--line); background: var(--paper); }
+.tables-filter-form { display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 9px; }
+.table-search { display: flex; min-width: min(100%, 270px); height: 37px; flex: 1 1 220px; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid #e5ded4; background: #fff; }
+.table-search svg { width: 17px; height: 17px; flex: 0 0 17px; color: #8e8275; }
+.table-search input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 11px; }
+.status-filter select, .table-create-form input, .table-create-form select, .table-create-form textarea, .table-edit-form input, .table-edit-form select, .table-edit-form textarea { width: 100%; min-width: 0; min-height: 36px; padding: 8px 9px; border: 1px solid #e5ded4; border-radius: 2px; background: #fffefa; color: var(--ink); font: inherit; font-size: 11px; }
+.status-filter select { min-width: 155px; }
+.table-create-form textarea, .table-edit-form textarea { resize: vertical; }
+.table-search:focus-within, .status-filter select:focus, .table-create-form input:focus, .table-create-form select:focus, .table-create-form textarea:focus, .table-edit-form input:focus, .table-edit-form select:focus, .table-edit-form textarea:focus { outline: 2px solid #c99a6e; outline-offset: 1px; }
+.clear-table-filter { color: #806a53; font-size: 10px; }
+.table-count { flex: 0 0 auto; color: #887d71; font-size: 10px; }
+.tables-section { min-width: 0; margin-bottom: 15px; border: 1px solid #e9e1d5; background: var(--paper); }
+.tables-section-heading { display: flex; min-height: 69px; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 17px; border-bottom: 1px solid #eee8de; }
+.tables-section-heading .section-kicker { margin-bottom: 4px; }
+.tables-section-heading h2 { margin: 0; color: var(--coffee); font-family: "Fraunces", Georgia, serif; font-size: 20px; font-weight: 500; }
+.tables-scroll { overflow-x: auto; }
+.tables-list { width: 100%; border-collapse: collapse; text-align: left; }
+.tables-list th { height: 37px; padding: 0 12px; background: #fbf9f4; color: #998d80; font-size: 8px; font-weight: 700; letter-spacing: .7px; white-space: nowrap; }
+.tables-list th:first-child, .tables-list td:first-child { padding-left: 17px; }
+.tables-list td { min-height: 58px; padding: 10px 12px; border-top: 1px solid #f0ebe3; color: #746a60; font-size: 10px; }
+.table-name { color: #504438; font-size: 11px; }
+.table-description { max-width: 260px; color: #91867b !important; }
+.table-status { display: inline-flex; align-items: center; gap: 6px; padding: 5px 7px; border-radius: 2px; font-size: 9px; white-space: nowrap; }
+.table-status i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.status-available { background: #edf1e9; color: #627353; }
+.status-occupied { background: #f4e8d8; color: #93643c; }
+.status-reserved { background: #e8edf0; color: #627b87; }
+.status-maintenance { background: #f2e9e8; color: #936c66; }
+.table-actions { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.table-actions form { margin: 0; }
+.table-edit-details { position: relative; }
+.table-edit-details summary { color: #796143; font-size: 10px; font-weight: 700; cursor: pointer; }
+.table-edit-form { position: absolute; z-index: 5; top: 24px; right: 0; display: grid; width: min(300px, 78vw); gap: 9px; padding: 14px; border: 1px solid #e3d8c9; background: #fffefa; box-shadow: 0 12px 28px rgba(53, 37, 24, .14); white-space: normal; }
+.table-edit-form > label, .table-create-form > label { display: grid; gap: 5px; color: #73685d; font-size: 10px; font-weight: 600; }
+.table-danger { padding: 4px 0; border: 0; background: none; color: #9b5b50; font: inherit; font-size: 10px; cursor: pointer; }
+.table-danger:hover { color: #713a32; text-decoration: underline; }
+.empty-tables { height: 94px; color: #978b7f !important; text-align: center; }
+.table-create-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; gap: 12px; padding: 15px 17px; }
+.table-description-field { grid-column: span 2; }
+.table-create-form > .table-button { justify-self: start; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .tables-list { min-width: 650px; }
+  .tables-toolbar { align-items: start; }
+  .table-count { padding-top: 10px; }
+  .table-create-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .tables-content { padding-top: 24px; }
+  .tables-content .page-heading { align-items: center; }
+  .table-primary-link { min-height: 34px; padding-inline: 10px; font-size: 10px; }
+  .tables-toolbar { flex-direction: column; gap: 8px; padding: 11px; }
+  .tables-filter-form { width: 100%; }
+  .tables-filter-form .table-button { flex: 1; }
+  .tables-toolbar > .table-count { padding: 0; }
+  .tables-section-heading { padding-inline: 13px; }
+  .table-create-form { grid-template-columns: 1fr; padding: 13px; }
+  .table-description-field { grid-column: auto; }
+}
