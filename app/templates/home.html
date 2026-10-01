@@ -3,11 +3,422 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quản lý quán cafe</title>
+    <meta name="theme-color" content="#302219" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+    />
+    <title>Dashboard | Cafe Management</title>
   </head>
-  <body>
-    <h1>HỆ THỐNG QUẢN LÝ QUÁN CAFE</h1>
+  <body class="dashboard-page">
+    <button
+      class="sidebar-scrim"
+      type="button"
+      data-sidebar-close
+      aria-label="Đóng điều hướng"
+    ></button>
+    <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+      <a class="brand brand-sidebar" href="{{ url_for('main.home') }}">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path
+              d="M12 19h22v11a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9V19Z"
+              stroke="currentColor"
+              stroke-width="2.5"
+            />
+            <path
+              d="M34 22h3a5 5 0 0 1 0 10h-4M18 13c0-2 2-2 2-4m7 4c0-2 2-2 2-4M9 42h31"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <span class="brand-words"
+          ><strong>Cafe</strong><small>MANAGEMENT</small></span
+        >
+      </a>
 
-    <p>Chào mừng đến với hệ thống.</p>
+      <p class="nav-caption">KHÔNG GIAN LÀM VIỆC</p>
+      <nav class="primary-nav">
+        <a
+          class="nav-item is-active"
+          href="{{ url_for('main.home') }}"
+          aria-current="page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect
+              x="3"
+              y="3"
+              width="8"
+              height="8"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="14"
+              y="3"
+              width="7"
+              height="5"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="14"
+              y="11"
+              width="7"
+              height="10"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="3"
+              y="14"
+              width="8"
+              height="7"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" href="{{ url_for('menu.menu_page') }}">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0M8 12v.01M16 12v.01"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Menu</span>
+        </a>
+        <button
+          class="nav-item nav-item-disabled"
+          type="button"
+          disabled
+          title="Module chưa được triển khai"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 10h16M6 10v9m4-9v9m4-9v9m4-9v9M3 20h18M12 4l9 4H3l9-4Z"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Bàn</span><small>Sắp có</small>
+        </button>
+        <button
+          class="nav-item nav-item-disabled"
+          type="button"
+          disabled
+          title="Module chưa được triển khai"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Đơn hàng</span><small>Sắp có</small>
+        </button>
+        <button
+          class="nav-item nav-item-disabled"
+          type="button"
+          disabled
+          title="Module chưa được triển khai"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <path
+              d="M3 10h18m-13 5h4"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            /></svg
+          ><span>Thanh toán</span><small>Sắp có</small>
+        </button>
+        <button
+          class="nav-item nav-item-disabled"
+          type="button"
+          disabled
+          title="Module chưa được triển khai"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 19V5m0 14h17M8 16v-4m5 4V7m5 9V9"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ><span>Thống kê</span><small>Sắp có</small>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip">
+          <span class="tip-mark" aria-hidden="true">✳</span>
+          <p>
+            <strong>Góc quán của bạn</strong><br />Một ngày mới, một tách cà phê
+            ngon.
+          </p>
+        </div>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <button class="logout-button" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>Đăng xuất</span>
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="topbar">
+        <button
+          class="menu-toggle"
+          type="button"
+          data-sidebar-toggle
+          aria-controls="sidebar"
+          aria-expanded="false"
+          aria-label="Mở điều hướng"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <a class="topbar-brand" href="{{ url_for('main.home') }}"
+          >Cafe <span>Management</span></a
+        >
+        <div class="topbar-right">
+          <span class="today-label"
+            ><span class="online-dot"></span> Hôm nay tại quán</span
+          >
+          <span class="user-avatar" aria-hidden="true"
+            >{{ current_user.username[:1]|upper }}</span
+          >
+          <span class="user-name">{{ current_user.username }}</span>
+        </div>
+      </header>
+
+      <main class="dashboard-content" id="dashboard">
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">THỨC UỐNG NGON, VẬN HÀNH GỌN</p>
+            <h1>Chào bạn, {{ current_user.username }}</h1>
+            <p class="page-subtitle">Đây là nhịp quán hôm nay.</p>
+          </div>
+          <span class="demo-badge"
+            ><span aria-hidden="true">●</span> DỮ LIỆU DEMO</span
+          >
+        </section>
+
+        <div class="demo-notice" role="note">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <path
+              d="M12 11v5m0-8h.01"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span
+            >Các chỉ số, đơn hàng và món bán chạy bên dưới là dữ liệu minh họa,
+            chưa kết nối hoạt động thực tế.</span
+          >
+        </div>
+
+        <section class="stats-grid" aria-label="Chỉ số demo">
+          {% for stat in dashboard.stats %}
+          <article class="stat-card">
+            <div class="stat-topline">
+              <span>{{ stat.label }}</span>
+              <span
+                class="stat-icon stat-icon-{{ stat.icon }}"
+                aria-hidden="true"
+              >
+                {% if stat.icon == "revenue" %}<svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M12 3v18m5-14.5C17 5.1 14.9 4 12 4s-5 1.1-5 3.5S9.1 11 12 12s5 2.1 5 4.5S14.9 20 12 20s-5-1.1-5-3.5"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                {% elif stat.icon == "orders" %}<svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h4"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                {% elif stat.icon == "menu" %}<svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M4 5h16M4 12h16M4 19h16M8 3v4m8 3v4m-8 3v4"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                {% else %}<svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 10h16M6 10v9m4-9v9m4-9v9m4-9v9M3 20h18M12 4l9 4H3l9-4Z"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+                >{% endif %}
+              </span>
+            </div>
+            <p class="stat-value">{{ stat.value }}</p>
+            <p class="stat-footnote">
+              Số liệu minh họa <span aria-hidden="true">↗</span>
+            </p>
+          </article>
+          {% endfor %}
+        </section>
+
+        <div class="dashboard-columns">
+          <section
+            class="data-section orders-section"
+            aria-labelledby="orders-title"
+          >
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">GẦN ĐÂY</p>
+                <h2 id="orders-title">Đơn hàng gần đây</h2>
+              </div>
+              <span class="section-demo">DEMO</span>
+            </div>
+            <div class="table-scroll">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th>MÃ ĐƠN</th>
+                    <th>CHI TIẾT</th>
+                    <th>THỜI GIAN</th>
+                    <th>TỔNG CỘNG</th>
+                    <th>TRẠNG THÁI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in dashboard.recent_orders %}
+                  <tr>
+                    <td>
+                      <strong>{{ order.code }}</strong
+                      ><small>{{ order.table }}</small>
+                    </td>
+                    <td>{{ order.items }}</td>
+                    <td>{{ order.time }}</td>
+                    <td class="amount-cell">{{ order.total }}</td>
+                    <td>
+                      <span class="order-status status-{{ loop.index }}"
+                        ><i></i>{{ order.status }}</span
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section
+            class="data-section best-sellers"
+            aria-labelledby="bestsellers-title"
+          >
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">ĐƯỢC ƯA CHUỘNG</p>
+                <h2 id="bestsellers-title">Món bán chạy</h2>
+              </div>
+              <span class="section-demo">DEMO</span>
+            </div>
+            <ol class="popular-list">
+              {% for item in dashboard.top_items %}
+              <li class="popular-item">
+                <span class="item-rank">0{{ loop.index }}</span>
+                <img
+                  src="{{ item.image }}"
+                  alt="{{ item.name }}"
+                  loading="lazy"
+                />
+                <span class="item-info"
+                  ><strong>{{ item.name }}</strong
+                  ><small>{{ item.category }}</small></span
+                >
+                <span class="item-sold"
+                  ><strong>{{ item.sold }}</strong><small>đã bán</small></span
+                >
+              </li>
+              {% endfor %}
+            </ol>
+            <p class="sample-caption">Số lượng bán chỉ mang tính minh họa.</p>
+          </section>
+        </div>
+
+        <footer class="dashboard-footer">
+          <span>Cafe Management</span
+          ><span>Dashboard demo · Chưa kết nối dữ liệu vận hành</span>
+        </footer>
+      </main>
+    </div>
+    <script
+      src="{{ url_for('static', filename='js/dashboard.js') }}"
+      defer
+    ></script>
   </body>
 </html>
