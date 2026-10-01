@@ -34,7 +34,7 @@
           <span>Menu</span>
         </a>
         <a class="nav-item" href="{{ url_for('tables.table_page') }}"><span>Bàn</span></a>
-        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Đơn hàng</span><small>Sắp có</small></button>
+        <a class="nav-item" href="{{ url_for('orders.order_list') }}"><span>Đơn hàng</span></a>
         <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thanh toán</span><small>Sắp có</small></button>
         <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thống kê</span><small>Sắp có</small></button>
       </nav>

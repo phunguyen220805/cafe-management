@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 
 from app.extensions import db
-from app.models import Category, MenuItem
+from app.models import Category, MenuItem, OrderItem
 
 
 _CENT = Decimal("0.01")
@@ -170,8 +170,10 @@ def update_menu_item(
 
 def delete_menu_item(menu_item_id):
     menu_item = _get_menu_item(menu_item_id)
+    if OrderItem.query.filter_by(menu_item_id=menu_item.id).first() is not None:
+        raise ValueError("Không thể xóa món đang được sử dụng trong đơn hàng.")
     db.session.delete(menu_item)
-    _commit()
+    _commit("Không thể xóa món đang được sử dụng trong đơn hàng.")
 
 
 def get_menu_items(search=None, category_id=None):

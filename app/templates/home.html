@@ -114,12 +114,7 @@
             /></svg
           ><span>Bàn</span>
         </a>
-        <button
-          class="nav-item nav-item-disabled"
-          type="button"
-          disabled
-          title="Module chưa được triển khai"
-        >
+        <a class="nav-item" href="{{ url_for('orders.order_list') }}">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"
@@ -128,8 +123,8 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             /></svg
-          ><span>Đơn hàng</span><small>Sắp có</small>
-        </button>
+          ><span>Đơn hàng</span>
+        </a>
         <button
           class="nav-item nav-item-disabled"
           type="button"

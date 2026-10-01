@@ -3,7 +3,7 @@ from decimal import Decimal, InvalidOperation
 from sqlalchemy.exc import IntegrityError
 
 from app.extensions import db
-from app.models import Table
+from app.models import Order, Table
 from app.models.table import TABLE_STATUSES
 
 
@@ -53,12 +53,12 @@ def _get_table(table_id):
     return table
 
 
-def _commit():
+def _commit(integrity_message="Tên bàn đã tồn tại hoặc dữ liệu không hợp lệ."):
     try:
         db.session.commit()
     except IntegrityError as error:
         db.session.rollback()
-        raise ValueError("Tên bàn đã tồn tại hoặc dữ liệu không hợp lệ.") from error
+        raise ValueError(integrity_message) from error
     except Exception:
         db.session.rollback()
         raise
@@ -101,8 +101,10 @@ def update_table(table_id, name, capacity, status, description=None):
 
 def delete_table(table_id):
     table = _get_table(table_id)
+    if Order.query.filter_by(table_id=table.id).first() is not None:
+        raise ValueError("Không thể xóa bàn đang được tham chiếu bởi đơn hàng.")
     db.session.delete(table)
-    _commit()
+    _commit("Không thể xóa bàn đang được tham chiếu bởi đơn hàng.")
 
 
 def get_tables(search=None, status=None):
