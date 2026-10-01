@@ -47,3 +47,6 @@ class Order(db.Model):
 
     table = db.relationship("Table")
     items = db.relationship("OrderItem", back_populates="order", lazy="selectin")
+    payments = db.relationship(
+        "Payment", back_populates="order", passive_deletes=True
+    )

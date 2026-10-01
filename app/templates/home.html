@@ -125,12 +125,7 @@
             /></svg
           ><span>Đơn hàng</span>
         </a>
-        <button
-          class="nav-item nav-item-disabled"
-          type="button"
-          disabled
-          title="Module chưa được triển khai"
-        >
+        <a class="nav-item" href="{{ url_for('payments.payment_list') }}">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect
               x="3"
@@ -147,8 +142,8 @@
               stroke-width="1.7"
               stroke-linecap="round"
             /></svg
-          ><span>Thanh toán</span><small>Sắp có</small>
-        </button>
+          ><span>Thanh toán</span>
+        </a>
         <button
           class="nav-item nav-item-disabled"
           type="button"
