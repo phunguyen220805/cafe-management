@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#302219" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payments.css') }}" />
+    <title>Quản lý thanh toán | Cafe Management</title>
+  </head>
+  <body class="dashboard-page payments-page">
+    <button class="sidebar-scrim" type="button" data-sidebar-close aria-label="Đóng điều hướng"></button>
+    <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+      <a class="brand brand-sidebar" href="{{ url_for('main.home') }}">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M12 19h22v11a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9V19Z" stroke="currentColor" stroke-width="2.5"/><path d="M34 22h3a5 5 0 0 1 0 10h-4M18 13c0-2 2-2 2-4m7 4c0-2 2-2 2-4M9 42h31" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+        <span class="brand-words"><strong>Cafe</strong><small>MANAGEMENT</small></span>
+      </a>
+      <p class="nav-caption">KHÔNG GIAN LÀM VIỆC</p>
+      <nav class="primary-nav">
+        <a class="nav-item" href="{{ url_for('main.home') }}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="11" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="8" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Dashboard</span></a>
+        <a class="nav-item" href="{{ url_for('menu.menu_page') }}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0M8 12v.01M16 12v.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Menu</span></a>
+        <a class="nav-item" href="{{ url_for('tables.table_page') }}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9h18l-1 4H4L3 9Zm2 4v7m14-7v7M8 13v7m8-7v7M7 9l1-5m9 5-1-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bàn</span></a>
+        <a class="nav-item" href="{{ url_for('orders.order_list') }}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đơn hàng</span></a>
+        <a class="nav-item is-active" href="{{ url_for('payments.payment_list') }}" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18m-13 5h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Thanh toán</span></a>
+        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thống kê</span><small>Sắp có</small></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><span class="tip-mark" aria-hidden="true">✳</span><p><strong>Góc quán của bạn</strong><br />Một ngày mới, một tách cà phê ngon.</p></div>
+        <form method="post" action="{{ url_for('auth.logout') }}"><button class="logout-button" type="submit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đăng xuất</span></button></form>
+      </div>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="false" aria-label="Mở điều hướng"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <a class="topbar-brand" href="{{ url_for('main.home') }}">Cafe <span>Management</span></a>
+        <div class="topbar-right"><span class="today-label"><span class="online-dot"></span> Quản lý thanh toán</span><span class="user-avatar" aria-hidden="true">{{ current_user.username[:1]|upper }}</span><span class="user-name">{{ current_user.username }}</span></div>
+      </header>
+
+      <main class="dashboard-content payments-content">
+        <section class="page-heading"><div><p class="eyebrow">THU NGÂN TẠI QUÁN</p><h1>Thanh toán</h1><p class="page-subtitle">Theo dõi và xác nhận các khoản thanh toán cho đơn hàng.</p></div><a class="payment-primary-link" href="#create-payment">+ Tạo thanh toán</a></section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}<div class="payment-flash payment-flash-{{ category }}" role="{{ 'alert' if category == 'error' else 'status' }}">{{ message }}</div>{% endfor %}
+        {% endwith %}
+
+        <section class="payments-toolbar" aria-label="Tìm kiếm và lọc thanh toán">
+          <form class="payments-filter-form" method="get" action="{{ url_for('payments.payment_list') }}">
+            <label class="payment-search"><span class="visually-hidden">Tìm mã đơn</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><input type="search" name="q" value="{{ search }}" placeholder="Tìm theo mã đơn" /></label>
+            <label class="payment-filter"><span class="visually-hidden">Lọc trạng thái</span><select name="status"><option value="">Tất cả trạng thái</option>{% for item_status in statuses %}<option value="{{ item_status }}" {% if selected_status == item_status %}selected{% endif %}>{{ status_labels[item_status] }}</option>{% endfor %}</select></label>
+            <label class="payment-filter"><span class="visually-hidden">Lọc phương thức</span><select name="method"><option value="">Tất cả phương thức</option>{% for item_method in methods %}<option value="{{ item_method }}" {% if selected_method == item_method %}selected{% endif %}>{{ method_labels[item_method] }}</option>{% endfor %}</select></label>
+            <button class="payment-button payment-button-dark" type="submit">Lọc</button>
+            {% if search or selected_status or selected_method %}<a class="clear-payment-filter" href="{{ url_for('payments.payment_list') }}">Xóa lọc</a>{% endif %}
+          </form>
+          <span class="payment-count">{{ payments|length }} khoản</span>
+        </section>
+
+        <section class="payments-section" aria-labelledby="payment-list-title">
+          <div class="payments-section-heading"><div><p class="section-kicker">MỚI NHẤT TRƯỚC</p><h2 id="payment-list-title">Danh sách thanh toán</h2></div></div>
+          <div class="payments-table-scroll">
+            <table class="payments-list">
+              <thead><tr><th>ĐƠN HÀNG</th><th>BÀN</th><th>SỐ TIỀN</th><th>PHƯƠNG THỨC</th><th>TRẠNG THÁI</th><th>TẠO LÚC</th><th>ĐÃ THANH TOÁN</th><th>THAO TÁC</th></tr></thead>
+              <tbody>
+                {% for payment in payments %}
+                <tr>
+                  <td><a class="payment-order-code" href="{{ url_for('payments.payment_detail', payment_id=payment.id) }}">{{ payment.order.order_code }}</a></td>
+                  <td>{{ payment.order.table.name if payment.order.table else "Mang đi" }}</td>
+                  <td class="payment-amount">{{ "{:,.2f}".format(payment.amount) }} đ</td>
+                  <td>{{ method_labels[payment.method] }}</td>
+                  <td><span class="payment-status payment-status-{{ payment.status }}"><i></i>{{ status_labels[payment.status] }}</span></td>
+                  <td class="payment-time">{{ payment.created_at.strftime("%d/%m/%Y %H:%M") }}</td>
+                  <td class="payment-time">{{ payment.paid_at.strftime("%d/%m/%Y %H:%M") if payment.paid_at else "—" }}</td>
+                  <td class="payment-actions"><a class="payment-view-link" href="{{ url_for('payments.payment_detail', payment_id=payment.id) }}">Chi tiết</a>{% if payment.status == 'pending' %}<details class="payment-action-details"><summary>Xử lý</summary><div class="payment-action-popover">{% if payment.method == 'transfer' %}<form method="post" action="{{ url_for('payments.confirm_payment', payment_id=payment.id) }}"><label>Mã giao dịch<input name="transaction_code" value="{{ payment.transaction_code or '' }}" maxlength="120" /></label><button class="payment-button payment-button-dark" type="submit">Xác nhận đã nhận</button></form>{% else %}<form method="post" action="{{ url_for('payments.confirm_payment', payment_id=payment.id) }}"><button class="payment-button payment-button-dark" type="submit">Xác nhận đã nhận</button></form>{% endif %}<form method="post" action="{{ url_for('payments.cancel_payment', payment_id=payment.id) }}" onsubmit="return confirm('Hủy thanh toán này?')"><button class="payment-danger" type="submit">Hủy thanh toán</button></form></div></details>{% endif %}</td>
+                </tr>
+                {% else %}
+                <tr><td class="empty-payments" colspan="8">Chưa có thanh toán phù hợp.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="payments-section create-payment-section" id="create-payment" aria-labelledby="create-payment-title">
+          <div class="payments-section-heading"><div><p class="section-kicker">TIẾP NHẬN</p><h2 id="create-payment-title">Tạo thanh toán</h2></div></div>
+          <form class="create-payment-form" method="post" action="{{ url_for('payments.create_payment') }}">
+            <label>Đơn hàng<select name="order_id" required {% if not payable_orders %}disabled{% endif %}><option value="">Chọn đơn hàng</option>{% for order in payable_orders %}<option value="{{ order.id }}">{{ order.order_code }} · {{ "{:,.2f}".format(order.total_amount) }} đ · {{ order.table.name if order.table else "Mang đi" }}</option>{% endfor %}</select></label>
+            <label>Phương thức<select name="method" required><option value="cash">Tiền mặt</option><option value="transfer">Chuyển khoản</option></select></label>
+            <label>Mã giao dịch chuyển khoản <span class="optional-label">(không bắt buộc)</span><input name="transaction_code" maxlength="120" placeholder="Nhập nếu đã có mã giao dịch" /></label>
+            <p class="payment-form-note">Số tiền lấy từ tổng đơn hàng và không thể chỉnh sửa tại đây.</p>
+            {% if not payable_orders %}<p class="payment-form-note">Không có đơn hàng nào đủ điều kiện tạo thanh toán.</p>{% endif %}
+            <button class="payment-button payment-button-dark" type="submit" {% if not payable_orders %}disabled{% endif %}>Tạo thanh toán</button>
+          </form>
+        </section>
+        <footer class="dashboard-footer"><span>Cafe Management</span><span>Quản lý thanh toán</span></footer>
+      </main>
+    </div>
+    {% if detail_payment %}
+    <div class="payment-overlay"><section class="payment-dialog" role="dialog" aria-modal="true" aria-labelledby="payment-detail-title">
+      <header class="payment-dialog-header"><div><p class="section-kicker">CHI TIẾT THANH TOÁN</p><h2 id="payment-detail-title">{{ detail_payment.order.order_code }}</h2></div><a class="payment-dialog-close" href="{{ url_for('payments.payment_list') }}" aria-label="Đóng chi tiết">×</a></header>
+      <dl class="payment-detail-grid"><div><dt>Địa điểm</dt><dd>{{ detail_payment.order.table.name if detail_payment.order.table else "Mang đi" }}</dd></div><div><dt>Số tiền</dt><dd class="payment-amount">{{ "{:,.2f}".format(detail_payment.amount) }} đ</dd></div><div><dt>Phương thức</dt><dd>{{ method_labels[detail_payment.method] }}</dd></div><div><dt>Trạng thái</dt><dd><span class="payment-status payment-status-{{ detail_payment.status }}"><i></i>{{ status_labels[detail_payment.status] }}</span></dd></div><div><dt>Mã giao dịch</dt><dd>{{ detail_payment.transaction_code or "—" }}</dd></div><div><dt>Khởi tạo</dt><dd>{{ detail_payment.created_at.strftime("%d/%m/%Y %H:%M") }}</dd></div><div><dt>Đã thanh toán</dt><dd>{{ detail_payment.paid_at.strftime("%d/%m/%Y %H:%M") if detail_payment.paid_at else "—" }}</dd></div></dl>
+      {% if detail_payment.status == 'pending' %}<div class="payment-dialog-actions">{% if detail_payment.method == 'transfer' %}<form method="post" action="{{ url_for('payments.confirm_payment', payment_id=detail_payment.id) }}"><label>Mã giao dịch<input name="transaction_code" value="{{ detail_payment.transaction_code or '' }}" maxlength="120" /></label><button class="payment-button payment-button-dark" type="submit">Xác nhận đã nhận</button></form>{% else %}<form method="post" action="{{ url_for('payments.confirm_payment', payment_id=detail_payment.id) }}"><button class="payment-button payment-button-dark" type="submit">Xác nhận đã nhận</button></form>{% endif %}<form method="post" action="{{ url_for('payments.cancel_payment', payment_id=detail_payment.id) }}" onsubmit="return confirm('Hủy thanh toán này?')"><button class="payment-danger" type="submit">Hủy thanh toán</button></form></div>{% endif %}
+    </section></div>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+  </body>
+</html>

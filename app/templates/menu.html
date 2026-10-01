@@ -10,87 +10,381 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/menu.css') }}"
+    />
     <title>Quản lý thực đơn | Cafe Management</title>
   </head>
   <body class="dashboard-page menu-page">
-    <button class="sidebar-scrim" type="button" data-sidebar-close aria-label="Đóng điều hướng"></button>
+    <button
+      class="sidebar-scrim"
+      type="button"
+      data-sidebar-close
+      aria-label="Đóng điều hướng"
+    ></button>
     <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
       <a class="brand brand-sidebar" href="{{ url_for('main.home') }}">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none"><path d="M12 19h22v11a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9V19Z" stroke="currentColor" stroke-width="2.5"/><path d="M34 22h3a5 5 0 0 1 0 10h-4M18 13c0-2 2-2 2-4m7 4c0-2 2-2 2-4M9 42h31" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 48 48" fill="none">
+            <path
+              d="M12 19h22v11a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9V19Z"
+              stroke="currentColor"
+              stroke-width="2.5"
+            />
+            <path
+              d="M34 22h3a5 5 0 0 1 0 10h-4M18 13c0-2 2-2 2-4m7 4c0-2 2-2 2-4M9 42h31"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+          </svg>
         </span>
-        <span class="brand-words"><strong>Cafe</strong><small>MANAGEMENT</small></span>
+        <span class="brand-words"
+          ><strong>Cafe</strong><small>MANAGEMENT</small></span
+        >
       </a>
       <p class="nav-caption">KHÔNG GIAN LÀM VIỆC</p>
       <nav class="primary-nav">
         <a class="nav-item" href="{{ url_for('main.home') }}">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="11" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="8" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect
+              x="3"
+              y="3"
+              width="8"
+              height="8"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="14"
+              y="3"
+              width="7"
+              height="5"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="14"
+              y="11"
+              width="7"
+              height="10"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <rect
+              x="3"
+              y="14"
+              width="8"
+              height="7"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+          </svg>
           <span>Dashboard</span>
         </a>
-        <a class="nav-item is-active" href="{{ url_for('menu.menu_page') }}" aria-current="page">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0M8 12v.01M16 12v.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a
+          class="nav-item is-active"
+          href="{{ url_for('menu.menu_page') }}"
+          aria-current="page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0M8 12v.01M16 12v.01"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
           <span>Menu</span>
         </a>
-        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Bàn</span><small>Sắp có</small></button>
-        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Đơn hàng</span><small>Sắp có</small></button>
-        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thanh toán</span><small>Sắp có</small></button>
-        <button class="nav-item nav-item-disabled" type="button" disabled title="Module chưa được triển khai"><span>Thống kê</span><small>Sắp có</small></button>
+        <a class="nav-item" href="{{ url_for('tables.table_page') }}"
+          ><span>Bàn</span></a
+        >
+        <a class="nav-item" href="{{ url_for('orders.order_list') }}"
+          ><span>Đơn hàng</span></a
+        >
+        <a class="nav-item" href="{{ url_for('payments.payment_list') }}"
+          ><span>Thanh toán</span></a
+        >
+        <button
+          class="nav-item nav-item-disabled"
+          type="button"
+          disabled
+          title="Module chưa được triển khai"
+        >
+          <span>Thống kê</span><small>Sắp có</small>
+        </button>
       </nav>
       <div class="sidebar-bottom">
-        <div class="sidebar-tip"><span class="tip-mark" aria-hidden="true">✳</span><p><strong>Góc quán của bạn</strong><br />Một ngày mới, một tách cà phê ngon.</p></div>
+        <div class="sidebar-tip">
+          <span class="tip-mark" aria-hidden="true">✳</span>
+          <p>
+            <strong>Góc quán của bạn</strong><br />Một ngày mới, một tách cà phê
+            ngon.
+          </p>
+        </div>
         <form method="post" action="{{ url_for('auth.logout') }}">
-          <button class="logout-button" type="submit"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đăng xuất</span></button>
+          <button class="logout-button" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M10 17l5-5-5-5m5 5H3m9-9h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg
+            ><span>Đăng xuất</span>
+          </button>
         </form>
       </div>
     </aside>
 
     <div class="dashboard-main">
       <header class="topbar">
-        <button class="menu-toggle" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="false" aria-label="Mở điều hướng"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-        <a class="topbar-brand" href="{{ url_for('main.home') }}">Cafe <span>Management</span></a>
-        <div class="topbar-right"><span class="today-label"><span class="online-dot"></span> Quản lý thực đơn</span><span class="user-avatar" aria-hidden="true">{{ current_user.username[:1]|upper }}</span><span class="user-name">{{ current_user.username }}</span></div>
+        <button
+          class="menu-toggle"
+          type="button"
+          data-sidebar-toggle
+          aria-controls="sidebar"
+          aria-expanded="false"
+          aria-label="Mở điều hướng"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <a class="topbar-brand" href="{{ url_for('main.home') }}"
+          >Cafe <span>Management</span></a
+        >
+        <div class="topbar-right">
+          <span class="today-label"
+            ><span class="online-dot"></span> Quản lý thực đơn</span
+          ><span class="user-avatar" aria-hidden="true"
+            >{{ current_user.username[:1]|upper }}</span
+          ><span class="user-name">{{ current_user.username }}</span>
+        </div>
       </header>
 
       <main class="dashboard-content menu-content">
         <section class="page-heading">
-          <div><p class="eyebrow">DANH MỤC VÀ SẢN PHẨM</p><h1>Thực đơn</h1><p class="page-subtitle">Quản lý món, giá bán và trạng thái phục vụ.</p></div>
+          <div>
+            <p class="eyebrow">DANH MỤC VÀ SẢN PHẨM</p>
+            <h1>Thực đơn</h1>
+            <p class="page-subtitle">
+              Quản lý món, giá bán và trạng thái phục vụ.
+            </p>
+          </div>
           <a class="menu-primary-link" href="#add-item">+ Thêm món</a>
         </section>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-        <div class="menu-flash menu-flash-{{ category }}" role="{{ 'alert' if category == 'error' else 'status' }}">{{ message }}</div>
-        {% endfor %}
-        {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %} {% for
+        category, message in messages %}
+        <div
+          class="menu-flash menu-flash-{{ category }}"
+          role="{{ 'alert' if category == 'error' else 'status' }}"
+        >
+          {{ message }}
+        </div>
+        {% endfor %} {% endwith %}
 
         <section class="menu-toolbar" aria-label="Tìm kiếm và lọc món">
-          <form class="menu-filter-form" method="get" action="{{ url_for('menu.menu_page') }}">
-            <label class="search-field"><span class="visually-hidden">Tìm món</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><input type="search" name="q" value="{{ search }}" placeholder="Tìm theo tên hoặc mô tả" /></label>
-            <label class="filter-field"><span class="visually-hidden">Lọc theo danh mục</span><select name="category_id"><option value="">Tất cả danh mục</option>{% for category in categories %}<option value="{{ category.id }}" {% if selected_category_id|string == category.id|string %}selected{% endif %}>{{ category.name }}</option>{% endfor %}</select></label>
-            <button class="menu-button menu-button-dark" type="submit">Lọc món</button>
-            {% if search or selected_category_id %}<a class="clear-filter" href="{{ url_for('menu.menu_page') }}">Xóa lọc</a>{% endif %}
+          <form
+            class="menu-filter-form"
+            method="get"
+            action="{{ url_for('menu.menu_page') }}"
+          >
+            <label class="search-field"
+              ><span class="visually-hidden">Tìm món</span
+              ><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle
+                  cx="10.8"
+                  cy="10.8"
+                  r="6.8"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="m16 16 4.5 4.5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                /></svg
+              ><input
+                type="search"
+                name="q"
+                value="{{ search }}"
+                placeholder="Tìm theo tên hoặc mô tả"
+            /></label>
+            <label class="filter-field"
+              ><span class="visually-hidden">Lọc theo danh mục</span
+              ><select name="category_id">
+                <option value="">Tất cả danh mục</option>
+                {% for category in categories %}
+                <option
+                  value="{{ category.id }}"
+                  {% if selected_category_id|string == category.id|string %}selected{%
+                  endif
+                  %}
+                >
+                  {{ category.name }}
+                </option>
+                {% endfor %}
+              </select></label
+            >
+            <button class="menu-button menu-button-dark" type="submit">
+              Lọc món
+            </button>
+            {% if search or selected_category_id %}<a
+              class="clear-filter"
+              href="{{ url_for('menu.menu_page') }}"
+              >Xóa lọc</a
+            >{% endif %}
           </form>
           <span class="result-count">{{ menu_items|length }} món</span>
         </section>
 
         <section class="menu-section" aria-labelledby="items-title">
-          <div class="menu-section-heading"><div><p class="section-kicker">DANH SÁCH</p><h2 id="items-title">Món trong thực đơn</h2></div></div>
+          <div class="menu-section-heading">
+            <div>
+              <p class="section-kicker">DANH SÁCH</p>
+              <h2 id="items-title">Món trong thực đơn</h2>
+            </div>
+          </div>
           <div class="menu-table-scroll">
             <table class="menu-table">
-              <thead><tr><th>MÓN</th><th>DANH MỤC</th><th>GIÁ</th><th>TRẠNG THÁI</th><th class="actions-heading">THAO TÁC</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>MÓN</th>
+                  <th>DANH MỤC</th>
+                  <th>GIÁ</th>
+                  <th>TRẠNG THÁI</th>
+                  <th class="actions-heading">THAO TÁC</th>
+                </tr>
+              </thead>
               <tbody>
                 {% for item in menu_items %}
                 <tr>
-                  <td><div class="menu-item-cell">{% if item.image %}<img class="menu-thumbnail" src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" />{% else %}<span class="menu-thumbnail menu-thumbnail-empty" aria-hidden="true">☕</span>{% endif %}<span><strong>{{ item.name }}</strong>{% if item.description %}<small>{{ item.description }}</small>{% endif %}</span></div></td>
+                  <td>
+                    <div class="menu-item-cell">
+                      {% if item.image %}<img
+                        class="menu-thumbnail"
+                        src="{{ item.image }}"
+                        alt="{{ item.name }}"
+                        loading="lazy"
+                      />{% else %}<span
+                        class="menu-thumbnail menu-thumbnail-empty"
+                        aria-hidden="true"
+                        >☕</span
+                      >{% endif %}<span
+                        ><strong>{{ item.name }}</strong>{% if item.description
+                        %}<small>{{ item.description }}</small>{% endif %}</span
+                      >
+                    </div>
+                  </td>
                   <td>{{ item.category.name }}</td>
-                  <td class="menu-price">{{ "{:,.0f}".format(item.price) }} đ</td>
-                  <td><span class="availability availability-{{ 'yes' if item.is_available else 'no' }}"><i></i>{{ "Đang bán" if item.is_available else "Tạm ẩn" }}</span></td>
-                  <td class="menu-actions"><details class="edit-details"><summary aria-label="Sửa {{ item.name }}">Sửa</summary><form class="inline-edit-form" method="post" action="{{ url_for('menu.update_menu_item', item_id=item.id) }}"><label>Tên món<input name="name" value="{{ item.name }}" required maxlength="160" /></label><label>Danh mục<select name="category_id" required>{% for category in categories %}<option value="{{ category.id }}" {% if category.id == item.category_id %}selected{% endif %}>{{ category.name }}</option>{% endfor %}</select></label><label>Giá (đ)<input name="price" type="number" min="0.01" step="0.01" value="{{ item.price }}" required /></label><label>Mô tả<textarea name="description" rows="2">{{ item.description or '' }}</textarea></label><label>Ảnh (URL hoặc đường dẫn)<input name="image" value="{{ item.image or '' }}" maxlength="500" /></label><label class="check-field"><input name="is_available" type="checkbox" value="on" {% if item.is_available %}checked{% endif %} /> Đang bán</label><button class="menu-button menu-button-dark" type="submit">Lưu thay đổi</button></form></details><form method="post" action="{{ url_for('menu.delete_menu_item', item_id=item.id) }}" onsubmit="return confirm('Xóa món này khỏi thực đơn?')"><button class="text-danger" type="submit">Xóa</button></form></td>
+                  <td class="menu-price">
+                    {{ "{:,.0f}".format(item.price) }} đ
+                  </td>
+                  <td>
+                    <span
+                      class="availability availability-{{ 'yes' if item.is_available else 'no' }}"
+                      ><i></i>{{ "Đang bán" if item.is_available else "Tạm ẩn"
+                      }}</span
+                    >
+                  </td>
+                  <td class="menu-actions">
+                    <details class="edit-details">
+                      <summary aria-label="Sửa {{ item.name }}">Sửa</summary>
+                      <form
+                        class="inline-edit-form"
+                        method="post"
+                        action="{{ url_for('menu.update_menu_item', item_id=item.id) }}"
+                      >
+                        <label
+                          >Tên món<input
+                            name="name"
+                            value="{{ item.name }}"
+                            required
+                            maxlength="160" /></label
+                        ><label
+                          >Danh mục<select name="category_id" required>
+                            {% for category in categories %}
+                            <option
+                              value="{{ category.id }}"
+                              {% if category.id == item.category_id %}selected{% endif %}
+                            >
+                              {{ category.name }}
+                            </option>
+                            {% endfor %}
+                          </select></label
+                        ><label
+                          >Giá (đ)<input
+                            name="price"
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            value="{{ item.price }}"
+                            required /></label
+                        ><label
+                          >Mô tả<textarea name="description" rows="2">
+{{ item.description or '' }}</textarea
+                          ></label
+                        ><label
+                          >Ảnh (URL hoặc đường dẫn)<input
+                            name="image"
+                            value="{{ item.image or '' }}"
+                            maxlength="500" /></label
+                        ><label class="check-field"
+                          ><input
+                            name="is_available"
+                            type="checkbox"
+                            value="on"
+                            {%
+                            if
+                            item.is_available
+                            %}checked{%
+                            endif
+                            %}
+                          />
+                          Đang bán</label
+                        ><button
+                          class="menu-button menu-button-dark"
+                          type="submit"
+                        >
+                          Lưu thay đổi
+                        </button>
+                      </form>
+                    </details>
+                    <form
+                      method="post"
+                      action="{{ url_for('menu.delete_menu_item', item_id=item.id) }}"
+                      onsubmit="return confirm('Xóa món này khỏi thực đơn?');"
+                    >
+                      <button class="text-danger" type="submit">Xóa</button>
+                    </form>
+                  </td>
                 </tr>
                 {% else %}
-                <tr><td class="empty-menu" colspan="5">Chưa có món phù hợp với bộ lọc.</td></tr>
+                <tr>
+                  <td class="empty-menu" colspan="5">
+                    Chưa có món phù hợp với bộ lọc.
+                  </td>
+                </tr>
                 {% endfor %}
               </tbody>
             </table>
@@ -98,34 +392,183 @@
         </section>
 
         <div class="menu-admin-grid">
-          <section class="menu-section form-section" id="add-item" aria-labelledby="add-item-title">
-            <div class="menu-section-heading"><div><p class="section-kicker">THỰC ĐƠN</p><h2 id="add-item-title">Thêm món</h2></div></div>
-            <form class="menu-form" method="post" action="{{ url_for('menu.create_menu_item') }}">
-              <label>Tên món<input name="name" required maxlength="160" placeholder="Ví dụ: Cà phê sữa đá" /></label>
-              <div class="form-row"><label>Danh mục<select name="category_id" required {% if not categories %}disabled{% endif %}><option value="">Chọn danh mục</option>{% for category in categories %}<option value="{{ category.id }}">{{ category.name }}</option>{% endfor %}</select></label><label>Giá (đ)<input name="price" type="number" min="0.01" step="0.01" required placeholder="35000" /></label></div>
-              <label>Mô tả<textarea name="description" rows="2" placeholder="Mô tả ngắn về món"></textarea></label>
-              <label>Ảnh (URL hoặc đường dẫn)<input name="image" maxlength="500" placeholder="https://..." /></label>
-              <label class="check-field"><input name="is_available" type="checkbox" value="on" checked /> Đang bán</label>
-              {% if not categories %}<p class="form-hint">Tạo danh mục trước khi thêm món.</p>{% endif %}
-              <button class="menu-button menu-button-dark" type="submit" {% if not categories %}disabled{% endif %}>Thêm vào thực đơn</button>
+          <section
+            class="menu-section form-section"
+            id="add-item"
+            aria-labelledby="add-item-title"
+          >
+            <div class="menu-section-heading">
+              <div>
+                <p class="section-kicker">THỰC ĐƠN</p>
+                <h2 id="add-item-title">Thêm món</h2>
+              </div>
+            </div>
+            <form
+              class="menu-form"
+              method="post"
+              action="{{ url_for('menu.create_menu_item') }}"
+            >
+              <label
+                >Tên món<input
+                  name="name"
+                  required
+                  maxlength="160"
+                  placeholder="Ví dụ: Cà phê sữa đá"
+              /></label>
+              <div class="form-row">
+                <label
+                  >Danh mục<select
+                    name="category_id"
+                    required
+                    {%
+                    if
+                    not
+                    categories
+                    %}disabled{%
+                    endif
+                    %}
+                  >
+                    <option value="">Chọn danh mục</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">
+                      {{ category.name }}
+                    </option>
+                    {% endfor %}
+                  </select></label
+                ><label
+                  >Giá (đ)<input
+                    name="price"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    required
+                    placeholder="35000"
+                /></label>
+              </div>
+              <label
+                >Mô tả<textarea
+                  name="description"
+                  rows="2"
+                  placeholder="Mô tả ngắn về món"
+                ></textarea>
+              </label>
+              <label
+                >Ảnh (URL hoặc đường dẫn)<input
+                  name="image"
+                  maxlength="500"
+                  placeholder="https://..."
+              /></label>
+              <label class="check-field"
+                ><input
+                  name="is_available"
+                  type="checkbox"
+                  value="on"
+                  checked
+                />
+                Đang bán</label
+              >
+              {% if not categories %}
+              <p class="form-hint">Tạo danh mục trước khi thêm món.</p>
+              {% endif %}
+              <button
+                class="menu-button menu-button-dark"
+                type="submit"
+                {%
+                if
+                not
+                categories
+                %}disabled{%
+                endif
+                %}
+              >
+                Thêm vào thực đơn
+              </button>
             </form>
           </section>
 
-          <section class="menu-section category-section" aria-labelledby="categories-title">
-            <div class="menu-section-heading"><div><p class="section-kicker">PHÂN LOẠI</p><h2 id="categories-title">Danh mục</h2></div><span class="result-count">{{ categories|length }}</span></div>
-            <form class="menu-form category-create-form" method="post" action="{{ url_for('menu.create_category') }}"><label>Tên danh mục<input name="name" required maxlength="120" placeholder="Ví dụ: Cà phê" /></label><label>Mô tả<textarea name="description" rows="2"></textarea></label><button class="menu-button menu-button-outline" type="submit">Thêm danh mục</button></form>
+          <section
+            class="menu-section category-section"
+            aria-labelledby="categories-title"
+          >
+            <div class="menu-section-heading">
+              <div>
+                <p class="section-kicker">PHÂN LOẠI</p>
+                <h2 id="categories-title">Danh mục</h2>
+              </div>
+              <span class="result-count">{{ categories|length }}</span>
+            </div>
+            <form
+              class="menu-form category-create-form"
+              method="post"
+              action="{{ url_for('menu.create_category') }}"
+            >
+              <label
+                >Tên danh mục<input
+                  name="name"
+                  required
+                  maxlength="120"
+                  placeholder="Ví dụ: Cà phê" /></label
+              ><label
+                >Mô tả<textarea name="description" rows="2"></textarea></label
+              ><button class="menu-button menu-button-outline" type="submit">
+                Thêm danh mục
+              </button>
+            </form>
             <ul class="category-list">
               {% for category in categories %}
-              <li><details class="category-details"><summary><span>{{ category.name }}</span><small>{{ category.menu_items|length }} món</small></summary><form class="category-edit-form" method="post" action="{{ url_for('menu.update_category', category_id=category.id) }}"><label>Tên danh mục<input name="name" value="{{ category.name }}" required maxlength="120" /></label><label>Mô tả<textarea name="description" rows="2">{{ category.description or '' }}</textarea></label><button class="menu-button menu-button-outline" type="submit">Lưu danh mục</button></form><form method="post" action="{{ url_for('menu.delete_category', category_id=category.id) }}" onsubmit="return confirm('Xóa danh mục này?')"><button class="text-danger" type="submit">Xóa danh mục</button></form></details></li>
+              <li>
+                <details class="category-details">
+                  <summary>
+                    <span>{{ category.name }}</span
+                    ><small>{{ category.menu_items|length }} món</small>
+                  </summary>
+                  <form
+                    class="category-edit-form"
+                    method="post"
+                    action="{{ url_for('menu.update_category', category_id=category.id) }}"
+                  >
+                    <label
+                      >Tên danh mục<input
+                        name="name"
+                        value="{{ category.name }}"
+                        required
+                        maxlength="120" /></label
+                    ><label
+                      >Mô tả<textarea name="description" rows="2">
+{{ category.description or '' }}</textarea
+                      ></label
+                    ><button
+                      class="menu-button menu-button-outline"
+                      type="submit"
+                    >
+                      Lưu danh mục
+                    </button>
+                  </form>
+                  <form
+                    method="post"
+                    action="{{ url_for('menu.delete_category', category_id=category.id) }}"
+                    onsubmit="return confirm('Xóa danh mục này?');"
+                  >
+                    <button class="text-danger" type="submit">
+                      Xóa danh mục
+                    </button>
+                  </form>
+                </details>
+              </li>
               {% else %}
               <li class="category-empty">Chưa có danh mục.</li>
               {% endfor %}
             </ul>
           </section>
         </div>
-        <footer class="dashboard-footer"><span>Cafe Management</span><span>Quản lý thực đơn</span></footer>
+        <footer class="dashboard-footer">
+          <span>Cafe Management</span><span>Quản lý thực đơn</span>
+        </footer>
       </main>
     </div>
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+    <script
+      src="{{ url_for('static', filename='js/dashboard.js') }}"
+      defer
+    ></script>
   </body>
 </html>

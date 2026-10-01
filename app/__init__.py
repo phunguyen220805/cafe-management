@@ -30,7 +30,7 @@ def create_app(test_config=None):
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
 
-    from app.models import Category, MenuItem, User
+    from app.models import Category, MenuItem, Order, OrderItem, Payment, Table, User
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -43,10 +43,16 @@ def create_app(test_config=None):
     from app.routes.main_routes import main_bp
     from app.routes.auth_routes import auth_bp
     from app.routes.menu_routes import menu_bp
+    from app.routes.order_routes import order_bp
+    from app.routes.payment_routes import payment_bp
+    from app.routes.table_routes import table_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(menu_bp)
+    app.register_blueprint(table_bp)
+    app.register_blueprint(order_bp)
+    app.register_blueprint(payment_bp)
 
     @app.cli.command("init-db")
     def init_db():
