@@ -189,6 +189,56 @@ class OrderTests(unittest.TestCase):
             updated = order_service.update_order_status(order.id, "preparing")
             self.assertEqual(updated.status, "preparing")
 
+    def test_allowed_order_status_transitions(self):
+        with self.app.app_context():
+            pending_to_preparing = self._create_order()
+            order_service.update_order_status(
+                pending_to_preparing.id, "preparing"
+            )
+            self.assertEqual(pending_to_preparing.status, "preparing")
+
+            pending_to_cancelled = self._create_order()
+            order_service.cancel_order(pending_to_cancelled.id)
+            self.assertEqual(pending_to_cancelled.status, "cancelled")
+
+            preparing_to_completed = self._create_order()
+            order_service.update_order_status(preparing_to_completed.id, "preparing")
+            order_service.update_order_status(preparing_to_completed.id, "completed")
+            self.assertEqual(preparing_to_completed.status, "completed")
+
+            preparing_to_cancelled = self._create_order()
+            order_service.update_order_status(preparing_to_cancelled.id, "preparing")
+            order_service.cancel_order(preparing_to_cancelled.id)
+            self.assertEqual(preparing_to_cancelled.status, "cancelled")
+
+    def test_disallowed_order_status_transitions_preserve_current_status(self):
+        with self.app.app_context():
+            cases = (
+                ("pending", "pending"),
+                ("preparing", "pending"),
+                ("completed", "preparing"),
+                ("completed", "cancelled"),
+                ("cancelled", "pending"),
+                ("cancelled", "completed"),
+            )
+            for initial_status, target_status in cases:
+                with self.subTest(
+                    initial_status=initial_status, target_status=target_status
+                ):
+                    order = self._create_order()
+                    if initial_status != "pending":
+                        order_service.update_order_status(order.id, "preparing")
+                    if initial_status == "completed":
+                        order_service.update_order_status(order.id, "completed")
+                    elif initial_status == "cancelled":
+                        order_service.cancel_order(order.id)
+
+                    with self.assertRaises(ValueError):
+                        order_service.update_order_status(order.id, target_status)
+                    self.assertEqual(
+                        db.session.get(Order, order.id).status, initial_status
+                    )
+
     def test_invalid_order_status_is_rejected(self):
         with self.app.app_context():
             order = self._create_order()

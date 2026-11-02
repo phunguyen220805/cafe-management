@@ -313,7 +313,11 @@
                         method="post"
                         action="{{ url_for('tables.update_table', table_id=table.id) }}"
                       >
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <input
+                          type="hidden"
+                          name="csrf_token"
+                          value="{{ csrf_token() }}"
+                        />
                         <label
                           >Tên bàn<input
                             name="name"
@@ -356,7 +360,11 @@
                       action="{{ url_for('tables.delete_table', table_id=table.id) }}"
                       onsubmit="return confirm('Xóa bàn này?');"
                     >
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                      <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                      />
                       <button class="table-danger" type="submit">Xóa</button>
                     </form>
                   </td>

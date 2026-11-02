@@ -11,6 +11,12 @@ from app.models.order import ORDER_STATUSES
 
 
 _CENT = Decimal("0.01")
+_STATUS_TRANSITIONS = {
+    "pending": {"preparing", "cancelled"},
+    "preparing": {"completed", "cancelled"},
+    "completed": set(),
+    "cancelled": set(),
+}
 
 
 def _required_id(value, label):
@@ -192,7 +198,12 @@ def get_order_form_options():
 
 def update_order_status(order_id, status):
     order = _get_order(order_id)
-    order.status = _valid_status(status)
+    target_status = _valid_status(status)
+    if target_status == order.status:
+        raise ValueError("Trạng thái đơn hàng không thay đổi.")
+    if target_status not in _STATUS_TRANSITIONS[order.status]:
+        raise ValueError("Không thể chuyển trạng thái đơn hàng theo thứ tự này.")
+    order.status = target_status
     _commit("Không thể cập nhật trạng thái đơn hàng.")
     return order
 

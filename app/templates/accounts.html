@@ -232,7 +232,11 @@
                           method="post"
                           action="{{ url_for('accounts.edit_account', user_id=user.id) }}"
                         >
-                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                          <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="{{ csrf_token() }}"
+                          />
                           <label
                             >Họ và tên<input
                               name="full_name"
@@ -278,7 +282,11 @@
                         action="{{ url_for('accounts.change_status', user_id=user.id) }}"
                         onsubmit="return confirm('{{ 'Mở khóa tài khoản này?' if not user.is_active else 'Khóa tài khoản này?' }}');"
                       >
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <input
+                          type="hidden"
+                          name="csrf_token"
+                          value="{{ csrf_token() }}"
+                        />
                         <input
                           type="hidden"
                           name="is_active"

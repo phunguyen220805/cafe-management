@@ -378,7 +378,11 @@
                           method="post"
                           action="{{ url_for('payments.confirm_payment', payment_id=payment.id) }}"
                         >
-                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                          <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="{{ csrf_token() }}"
+                          />
                           <label
                             >Mã giao dịch<input
                               name="transaction_code"
@@ -396,7 +400,11 @@
                           method="post"
                           action="{{ url_for('payments.confirm_payment', payment_id=payment.id) }}"
                         >
-                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                          <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="{{ csrf_token() }}"
+                          />
                           <button
                             class="payment-button payment-button-dark"
                             type="submit"
@@ -410,7 +418,11 @@
                           action="{{ url_for('payments.cancel_payment', payment_id=payment.id) }}"
                           onsubmit="return confirm('Hủy thanh toán này?');"
                         >
-                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                          <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="{{ csrf_token() }}"
+                          />
                           <button class="payment-danger" type="submit">
                             Hủy thanh toán
                           </button>

@@ -342,7 +342,11 @@
                         method="post"
                         action="{{ url_for('orders.update_order_status', order_id=order.id) }}"
                       >
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <input
+                          type="hidden"
+                          name="csrf_token"
+                          value="{{ csrf_token() }}"
+                        />
                         <label
                           class="visually-hidden"
                           for="status-{{ order.id }}"
@@ -370,7 +374,11 @@
                       action="{{ url_for('orders.cancel_order', order_id=order.id) }}"
                       onsubmit="return confirm('Hủy đơn {{ order.order_code }}?')"
                     >
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                      <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                      />
                       <button class="order-danger" type="submit">Hủy</button>
                     </form>
                     {% endif %}
