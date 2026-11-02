@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -155,6 +155,11 @@
             /></svg
           ><span>Kho nguyên liệu</span></a
         >
+        {% if current_user.is_admin() %}
+        <a class="nav-item" href="{{ url_for('accounts.account_list') }}"
+          ><span>Quản lý tài khoản</span></a
+        >
+        {% endif %}
       </nav>
       <div class="sidebar-bottom">
         <div class="sidebar-tip">
@@ -267,32 +272,10 @@
             <label class="inventory-filter"
               ><span class="visually-hidden">Lọc trạng thái</span
               ><select name="active">
-                <option value="">Tất cả trạng thái</option>
-                <option
-                  value="active"
-                  {%
-                  if
-                  selected_active=""
-                  ="active"
-                  %}selected{%
-                  endif
-                  %}
-                >
-                  Đang dùng
-                </option>
-                <option
-                  value="inactive"
-                  {%
-                  if
-                  selected_active=""
-                  ="inactive"
-                  %}selected{%
-                  endif
-                  %}
-                >
-                  Ngừng dùng
-                </option>
-              </select></label
+  <option value="" {{ 'selected' if selected_active == '' else '' }}>Tất cả trạng thái</option>
+  <option value="active" {{ 'selected' if selected_active == 'active' else '' }}>Đang dùng</option>
+  <option value="inactive" {{ 'selected' if selected_active == 'inactive' else '' }}>Ngưng dùng</option>
+</select></label
             >
             <label class="inventory-low-filter"
               ><input
