@@ -20,6 +20,7 @@ class AccountTests(unittest.TestCase):
         self.app = create_app(
             {
                 "TESTING": True,
+                "WTF_CSRF_ENABLED": False,
                 "SECRET_KEY": "test-secret-key",
                 "SQLALCHEMY_DATABASE_URI": f"sqlite:///{self.database_path.as_posix()}",
             }
@@ -251,6 +252,7 @@ class UserMigrationTests(unittest.TestCase):
         self.app = create_app(
             {
                 "TESTING": True,
+                "WTF_CSRF_ENABLED": False,
                 "SECRET_KEY": "test-secret-key",
                 "SQLALCHEMY_DATABASE_URI": f"sqlite:///{self.database_path.as_posix()}",
             }

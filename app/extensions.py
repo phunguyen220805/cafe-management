@@ -4,10 +4,12 @@ from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
 
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+csrf = CSRFProtect()
 
 
 @event.listens_for(Engine, "connect")

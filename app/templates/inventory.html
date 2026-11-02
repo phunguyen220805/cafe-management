@@ -170,6 +170,7 @@
           </p>
         </div>
         <form method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <button class="logout-button" type="submit">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
@@ -365,6 +366,7 @@
                             method="post"
                             action="{{ url_for('inventory.update_ingredient', ingredient_id=ingredient.id) }}"
                           >
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <label
                               >Tên<input
                                 name="name"
@@ -421,6 +423,7 @@
                             method="post"
                             action="{{ url_for('inventory.import_stock', ingredient_id=ingredient.id) }}"
                           >
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <label
                               >Số lượng<input
                                 name="quantity"
@@ -454,6 +457,7 @@
                             method="post"
                             action="{{ url_for('inventory.export_stock', ingredient_id=ingredient.id) }}"
                           >
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                             <label
                               >Số lượng<input
                                 name="quantity"
@@ -490,6 +494,7 @@
                           action="{{ url_for('inventory.delete_ingredient', ingredient_id=ingredient.id) }}"
                           onsubmit="return confirm('Xóa nguyên liệu này?');"
                         >
+                          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                           <button class="inventory-danger" type="submit">
                             Xóa nguyên liệu
                           </button>
@@ -526,6 +531,7 @@
             method="post"
             action="{{ url_for('inventory.create_ingredient') }}"
           >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <label
               >Tên nguyên liệu<input
                 name="name"

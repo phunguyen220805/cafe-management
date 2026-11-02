@@ -79,6 +79,7 @@
           </p>
         </div>
         <form method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <button class="logout-button" type="submit">
             <span>Đăng xuất</span>
           </button>

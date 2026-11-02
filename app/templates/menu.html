@@ -142,6 +142,7 @@
           </p>
         </div>
         <form method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <button class="logout-button" type="submit">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
@@ -321,6 +322,7 @@
                         method="post"
                         action="{{ url_for('menu.update_menu_item', item_id=item.id) }}"
                       >
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <label
                           >Tên món<input
                             name="name"
@@ -381,6 +383,7 @@
                       action="{{ url_for('menu.delete_menu_item', item_id=item.id) }}"
                       onsubmit="return confirm('Xóa món này khỏi thực đơn?');"
                     >
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                       <button class="text-danger" type="submit">Xóa</button>
                     </form>
                   </td>
@@ -414,6 +417,7 @@
               method="post"
               action="{{ url_for('menu.create_menu_item') }}"
             >
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
               <label
                 >Tên món<input
                   name="name"
@@ -508,6 +512,7 @@
               method="post"
               action="{{ url_for('menu.create_category') }}"
             >
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
               <label
                 >Tên danh mục<input
                   name="name"
@@ -533,6 +538,7 @@
                     method="post"
                     action="{{ url_for('menu.update_category', category_id=category.id) }}"
                   >
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <label
                       >Tên danh mục<input
                         name="name"
@@ -555,6 +561,7 @@
                     action="{{ url_for('menu.delete_category', category_id=category.id) }}"
                     onsubmit="return confirm('Xóa danh mục này?');"
                   >
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <button class="text-danger" type="submit">
                       Xóa danh mục
                     </button>

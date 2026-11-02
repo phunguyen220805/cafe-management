@@ -155,6 +155,7 @@
           </p>
         </div>
         <form method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <button class="logout-button" type="submit">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
@@ -341,6 +342,7 @@
                         method="post"
                         action="{{ url_for('orders.update_order_status', order_id=order.id) }}"
                       >
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <label
                           class="visually-hidden"
                           for="status-{{ order.id }}"
@@ -368,6 +370,7 @@
                       action="{{ url_for('orders.cancel_order', order_id=order.id) }}"
                       onsubmit="return confirm('Hủy đơn {{ order.order_code }}?')"
                     >
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                       <button class="order-danger" type="submit">Hủy</button>
                     </form>
                     {% endif %}
@@ -401,6 +404,7 @@
             method="post"
             action="{{ url_for('orders.create_order') }}"
           >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="order-form-meta">
               <label
                 >Bàn<select name="table_id">
@@ -535,6 +539,7 @@
             method="post"
             action="{{ url_for('orders.update_order_status', order_id=detail_order.id) }}"
           >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <label for="detail-status">Trạng thái</label
             ><select id="detail-status" name="status">
               {% for item_status in statuses %}
@@ -555,6 +560,7 @@
             action="{{ url_for('orders.cancel_order', order_id=detail_order.id) }}"
             onsubmit="return confirm('Hủy đơn {{ detail_order.order_code }}?')"
           >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <button class="order-danger" type="submit">Hủy đơn</button>
           </form>
           {% endif %}
