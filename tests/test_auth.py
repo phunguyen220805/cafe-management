@@ -39,6 +39,21 @@ class AuthTests(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.location.startswith("/login?next="))
 
+    def test_all_main_pages_redirect_to_login_when_unauthenticated(self):
+        for path in (
+            "/",
+            "/menu",
+            "/tables",
+            "/orders",
+            "/payments",
+            "/inventory",
+            "/accounts",
+        ):
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                self.assertEqual(response.status_code, 302)
+                self.assertTrue(response.location.startswith("/login?next="))
+
     def test_dashboard_shows_demo_data_after_login(self):
         self.client.post(
             "/login", data={"username": "barista", "password": "Cafe@123"}
