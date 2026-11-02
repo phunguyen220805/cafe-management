@@ -19,7 +19,7 @@
 .payments-section { min-width: 0; margin-bottom: 15px; border: 1px solid #e9e1d5; background: var(--paper); }
 .payments-section-heading { display: flex; min-height: 66px; align-items: center; justify-content: space-between; padding: 11px 16px; border-bottom: 1px solid #eee8de; }
 .payments-section-heading .section-kicker { margin-bottom: 4px; }
-.payments-section-heading h2 { margin: 0; color: var(--coffee); font-family: "Fraunces", Georgia, serif; font-size: 20px; font-weight: 500; }
+.payments-section-heading h2 { margin: 0; color: var(--coffee); font-family: var(--font-sans); font-size: 20px; font-weight: 500; }
 .payments-table-scroll { overflow-x: auto; }
 .payments-list { width: 100%; border-collapse: collapse; text-align: left; }
 .payments-list th { height: 35px; padding: 0 9px; background: #fbf9f4; color: #998d80; font-size: 8px; font-weight: 700; letter-spacing: .4px; white-space: nowrap; }
@@ -56,7 +56,7 @@
 .payment-dialog { width: min(620px, 100%); max-height: min(88vh, 800px); overflow: auto; padding: 19px; border: 1px solid #e7ddcf; background: #fffefa; box-shadow: 0 20px 60px rgba(26, 18, 13, .25); animation: payment-dialog-in .2s ease both; }
 .payment-dialog-header { display: flex; align-items: start; justify-content: space-between; gap: 14px; padding-bottom: 13px; border-bottom: 1px solid #eee8de; }
 .payment-dialog-header .section-kicker { margin-bottom: 4px; }
-.payment-dialog-header h2 { margin: 0; color: var(--coffee); font-family: "Fraunces", Georgia, serif; font-size: 22px; font-weight: 500; }
+.payment-dialog-header h2 { margin: 0; color: var(--coffee); font-family: var(--font-sans); font-size: 22px; font-weight: 500; }
 .payment-dialog-close { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid #e9e1d5; color: #685b4d; font-size: 22px; line-height: 1; text-decoration: none; }
 .payment-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 15px 0; }
 .payment-detail-grid > div { display: grid; gap: 4px; min-width: 0; }

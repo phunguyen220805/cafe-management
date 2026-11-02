@@ -156,7 +156,7 @@
 .tables-section-heading h2 {
   margin: 0;
   color: var(--coffee);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-sans);
   font-size: 20px;
   font-weight: 500;
 }
