@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accounts.css') }}" />
+    <title>Quản lý tài khoản | Cafe Management</title>
+  </head>
+  <body class="dashboard-page accounts-page">
+    <main class="dashboard-main accounts-main">
+      <header class="topbar">
+        <a class="topbar-brand" href="{{ url_for('main.home') }}">Cafe <span>Management</span></a>
+        <div class="topbar-right">
+          <span class="user-avatar" aria-hidden="true">{{ current_user.username[:1]|upper }}</span>
+          <span class="user-name">{{ current_user.username }}</span>
+          <form method="post" action="{{ url_for('auth.logout') }}">
+            <button class="logout-button" type="submit">Đăng xuất</button>
+          </form>
+        </div>
+      </header>
+
+      <section class="dashboard-content accounts-content">
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">QUẢN TRỊ HỆ THỐNG</p>
+            <h1>Quản lý tài khoản</h1>
+            <p class="page-subtitle">Theo dõi hồ sơ, quyền và trạng thái nhân viên.</p>
+          </div>
+          <a class="accounts-back-link" href="{{ url_for('main.home') }}">Về Dashboard</a>
+        </section>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <div class="accounts-flash accounts-flash-{{ category }}" role="{{ 'alert' if category == 'error' else 'status' }}">{{ message }}</div>
+          {% endfor %}
+        {% endwith %}
+
+        <section class="accounts-stats" aria-label="Tổng quan tài khoản">
+          <article class="accounts-stat"><span>Tổng tài khoản</span><strong>{{ stats.total }}</strong></article>
+          <article class="accounts-stat"><span>Admin</span><strong>{{ stats.admins }}</strong></article>
+          <article class="accounts-stat"><span>Nhân viên</span><strong>{{ stats.employees }}</strong></article>
+          <article class="accounts-stat"><span>Đang hoạt động</span><strong>{{ stats.active }}</strong></article>
+        </section>
+
+        <section class="accounts-layout">
+          <form class="accounts-panel accounts-create-panel" method="post" action="{{ url_for('accounts.create_account') }}">
+            <div class="accounts-panel-heading">
+              <div><p class="accounts-kicker">HỒ SƠ MỚI</p><h2>Tạo tài khoản</h2></div>
+            </div>
+            <label for="username">Tên đăng nhập</label>
+            <input id="username" name="username" type="text" autocomplete="username" required />
+            <label for="full_name">Họ và tên</label>
+            <input id="full_name" name="full_name" type="text" autocomplete="name" />
+            <label for="date_of_birth">Ngày sinh</label>
+            <input id="date_of_birth" name="date_of_birth" type="date" max="{{ today.isoformat() if today else '' }}" />
+            <label for="password">Mật khẩu</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" required />
+            <label for="role">Vai trò</label>
+            <select id="role" name="role">
+              <option value="employee">Nhân viên</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button class="accounts-primary-button" type="submit">Tạo tài khoản</button>
+          </form>
+
+          <section class="accounts-panel accounts-list-panel">
+            <div class="accounts-panel-heading accounts-list-heading">
+              <div><p class="accounts-kicker">DANH SÁCH NHÂN SỰ</p><h2>Tài khoản hiện có</h2></div>
+              <span class="accounts-result-count">{{ users|length }} kết quả</span>
+            </div>
+            <form class="accounts-filters" method="get" action="{{ url_for('accounts.account_list') }}">
+              <label class="accounts-search"><span class="visually-hidden">Tìm tài khoản</span><input name="q" value="{{ search }}" placeholder="Tìm tên đăng nhập hoặc họ tên" /></label>
+              <select name="role" aria-label="Lọc theo vai trò">
+                <option value="">Tất cả vai trò</option>
+                <option value="admin" {% if selected_role == 'admin' %}selected{% endif %}>Admin</option>
+                <option value="employee" {% if selected_role == 'employee' %}selected{% endif %}>Nhân viên</option>
+              </select>
+              <select name="status" aria-label="Lọc theo trạng thái">
+                <option value="">Tất cả trạng thái</option>
+                <option value="active" {% if selected_status == 'active' %}selected{% endif %}>Đang hoạt động</option>
+                <option value="locked" {% if selected_status == 'locked' %}selected{% endif %}>Đã khóa</option>
+              </select>
+              <button type="submit">Lọc</button>
+            </form>
+
+            {% if users %}
+            <div class="accounts-table-wrap">
+              <table class="accounts-table">
+                <thead><tr><th>Tài khoản</th><th>Họ và tên</th><th>Ngày sinh</th><th>Vai trò</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+                <tbody>
+                  {% for user in users %}
+                  <tr>
+                    <td><strong>{{ user.username }}</strong>{% if user.id == current_user.id %}<span class="accounts-you">Bạn</span>{% endif %}</td>
+                    <td>{{ user.full_name or 'Chưa cập nhật' }}</td>
+                    <td>{{ user.date_of_birth.strftime('%d/%m/%Y') if user.date_of_birth else 'Chưa cập nhật' }}</td>
+                    <td><span class="accounts-badge accounts-badge-{{ user.role }}">{{ 'Admin' if user.role == 'admin' else 'Nhân viên' }}</span></td>
+                    <td><span class="accounts-badge accounts-badge-{{ 'active' if user.is_active else 'locked' }}">{{ 'Đang hoạt động' if user.is_active else 'Đã khóa' }}</span></td>
+                    <td class="accounts-actions">
+                      <details class="accounts-edit-details">
+                        <summary>Sửa</summary>
+                        <form class="accounts-edit-form" method="post" action="{{ url_for('accounts.edit_account', user_id=user.id) }}">
+                          <label>Họ và tên<input name="full_name" value="{{ user.full_name or '' }}" /></label>
+                          <label>Ngày sinh<input name="date_of_birth" type="date" value="{{ user.date_of_birth.isoformat() if user.date_of_birth else '' }}" max="{{ today.isoformat() if today else '' }}" /></label>
+                          <label>Vai trò<select name="role" {% if user.id == current_user.id %}disabled{% endif %}><option value="employee" {% if user.role == 'employee' %}selected{% endif %}>Nhân viên</option><option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option></select></label>
+                          {% if user.id == current_user.id %}<input type="hidden" name="role" value="admin" />{% endif %}
+                          <button type="submit">Lưu thay đổi</button>
+                        </form>
+                      </details>
+                      {% if user.id != current_user.id %}
+                      <form method="post" action="{{ url_for('accounts.change_status', user_id=user.id) }}" onsubmit="return confirm('{{ 'Mở khóa tài khoản này?' if not user.is_active else 'Khóa tài khoản này?' }}');">
+                        <input type="hidden" name="is_active" value="{{ 0 if user.is_active else 1 }}" />
+                        <button class="accounts-secondary-button" type="submit">{{ 'Mở khóa' if not user.is_active else 'Khóa' }}</button>
+                      </form>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <div class="accounts-empty"><strong>Không tìm thấy tài khoản</strong><span>Thử thay đổi từ khóa hoặc bộ lọc.</span></div>
+            {% endif %}
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
